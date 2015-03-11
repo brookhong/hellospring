@@ -16,8 +16,11 @@ public class MainApp {
 
         objA.setMessage("I'm object A");
         objA.getMessage();
+        objA.spellCheck();
         HelloWorld objB = (HelloWorld) context.getBean("helloChina");
         objB.getMessage();
+        objB.spellCheck2();
+        objB.spellCheck3();
 
         context.registerShutdownHook();
     }

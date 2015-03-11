@@ -8,10 +8,20 @@
     <bean id="beanTeamplate" abstract="true" init-method="init" destroy-method="destroy" />
 
     <bean id="helloWorld" class="hello.HelloWorld" parent="beanTeamplate">
+        <constructor-arg type="int" value="2001"/>
+        <constructor-arg ref="spellChecker1"/>
         <property name="message" value="vocally self critical"/>
     </bean>
     <bean id="helloChina" class="hello.HelloWorld">
+        <constructor-arg type="int" value="2002"/>
+        <constructor-arg ref="spellChecker1"/>
+        <property name="spellChecker2" ref="spellChecker2"/>
+        <property name="spellChecker3">
+            <bean id="spellChecker3" class="hello.SpellChecker"/>
+        </property>
         <property name="message" value="China"/>
     </bean>
     <bean class="hello.InitHelloWorld" />
+    <bean id="spellChecker1" class="hello.SpellChecker"/>
+    <bean id="spellChecker2" class="hello.SpellChecker"/>
 </beans>
