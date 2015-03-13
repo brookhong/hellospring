@@ -2,15 +2,20 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <context:annotation-config/>
     <bean id="beanTeamplate" abstract="true" init-method="init" destroy-method="destroy" />
 
     <bean id="helloWorld" class="hello.HelloWorld" parent="beanTeamplate">
         <constructor-arg type="int" value="2001"/>
         <constructor-arg ref="spellChecker1"/>
-        <property name="message" value="vocally self critical"/>
+        <property name="spellChecker2" ref="spellChecker2"/>
+        <property name="message"><null/></property>
     </bean>
     <bean id="helloChina" class="hello.HelloWorld">
         <constructor-arg type="int" value="2002"/>
@@ -19,9 +24,47 @@
         <property name="spellChecker3">
             <bean id="spellChecker3" class="hello.SpellChecker"/>
         </property>
-        <property name="message" value="China"/>
+        <property name="message" value=""/>
     </bean>
     <bean class="hello.InitHelloWorld" />
     <bean id="spellChecker1" class="hello.SpellChecker"/>
     <bean id="spellChecker2" class="hello.SpellChecker"/>
+
+    <bean id="javaCollection" class="hello.JavaCollection">
+        <property name="addressList">
+            <list>
+                <ref bean="spellChecker1"/>
+                <ref bean="spellChecker2"/>
+                <value>USA</value>
+            </list>
+        </property>
+        <property name="addressSet">
+            <set>
+                <ref bean="spellChecker1"/>
+                <ref bean="spellChecker2"/>
+                <value>USA</value>
+            </set>
+        </property>
+        <property name="addressMap">
+            <map>
+                <entry key="1" value="NDIA"/>
+                <entry key ="two" value-ref="spellChecker1"/>
+                <entry key ="three" value-ref="spellChecker2"/>
+            </map>
+        </property>
+        <property name="addressProp">
+            <props>
+                <prop key="one">INDIA</prop>
+                <prop key="two">Pakistan</prop>
+                <prop key="three">USA</prop>
+                <prop key="four">USA</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="cStartEventHandler" class="hello.CStartEventHandler"/>
+    <bean id="cStopEventHandler" class="hello.CStopEventHandler"/>
+    <bean id="customEventHandler" class="hello.CustomEventHandler"/>
+    <bean id="customEventPublisher" class="hello.CustomEventPublisher"/>
+
 </beans>

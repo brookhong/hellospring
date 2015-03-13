@@ -1,4 +1,5 @@
 package hello;
+import org.springframework.beans.factory.annotation.Required;
 
 public class HelloWorld {
     private String message;
@@ -14,6 +15,7 @@ public class HelloWorld {
     public void spellCheck() {
         spellChecker.checkSpelling();
     }
+    @Required
     public void setSpellChecker2(SpellChecker spellChecker) {
         System.out.println("Inside setSpellChecker2." );
         this.spellChecker2 = spellChecker;
